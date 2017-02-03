@@ -70,6 +70,23 @@ public class CustomerBill {
         BigDecimal servicePercentage = null;
         BigDecimal maxServiceCharge = new BigDecimal("20.00");
 
+        if (checkForHotFoodItems(hasHotFoodItems, maxServiceCharge)) return;
+
+        checkForFoodItems(hasFoodItems);
+    }
+
+    private void checkForFoodItems(boolean hasFoodItems) {
+        BigDecimal servicePercentage;
+        if (hasFoodItems) { //When purchased items include any food apply a service charge of 10%
+            servicePercentage = new BigDecimal("0.10");
+            serviceCharge = total.multiply(servicePercentage);
+            total = total.add(serviceCharge);
+            return;
+        }
+    }
+
+    private boolean checkForHotFoodItems(boolean hasHotFoodItems, BigDecimal maxServiceCharge) {
+        BigDecimal servicePercentage;
         if (hasHotFoodItems) { //When purchased items include any hot food apply a service charge of 20% to the total bill with a maximum £20 service charge
             servicePercentage = new BigDecimal("0.20");
             serviceCharge = total.multiply(servicePercentage);
@@ -77,15 +94,9 @@ public class CustomerBill {
                 serviceCharge = maxServiceCharge;
             }
             total = total.add(serviceCharge);
-            return;
+            return true;
         }
-
-        if (hasFoodItems) { //When purchased items include any food apply a service charge of 10%
-            servicePercentage = new BigDecimal("0.10");
-            serviceCharge = total.multiply(servicePercentage);
-            total = total.add(serviceCharge);
-            return;
-        }
+        return false;
     }
 
 

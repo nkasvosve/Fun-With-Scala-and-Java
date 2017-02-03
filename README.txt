@@ -1,4 +1,9 @@
+---------------------------------------------------------
+   How to run Java Version:
+        cd into project folder
+        mvn test
 
+---------------------------------------------------------
 Requirements:
         Cafe ACME menu consists of the following items:
         Cola - Cold - 50p
@@ -35,9 +40,6 @@ The entry point is CustomerBill.addCartProducts with signature:
 
     Install maven
         https://maven.apache.org/
-
-    Running Java Version:
-        mvn test
 
 
 Sample Receipt:
